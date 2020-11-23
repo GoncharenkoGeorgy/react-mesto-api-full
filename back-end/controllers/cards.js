@@ -24,13 +24,19 @@ const createCard = (req, res, next) => {
 };
 
 const deleteCard = (req, res, next) => {
-  Card.findByIdAndRemove(req.params.id)
+  Card.findById(req.params.id)
     .orFail()
-    .then((card) => res.send({ data: card }))
-    .catch((err) => {
-      if (err.name === 'CastError' || err.name === 'DocumentNotFoundError') {
-        throw new NotFoundError('Карточка с таким id не найдена');
+    .then((card) => {
+      if (card.owner.toString() !== req.user.id) {
+        throw new BadRequestError({ message: 'Эту карточку создал другой пользователь' });
       }
+      Card.findByIdAndRemove(req.params.id)
+        .then((card) => res.send({ data: card }))
+        .catch((err) => {
+          if (err.name === 'CastError' || err.name === 'DocumentNotFoundError') {
+            throw new NotFoundError('Карточка с таким id не найдена');
+          }
+        })
     })
     .catch(next);
 };
@@ -57,7 +63,7 @@ const dislikeCard = (req, res, next) => {
     { $pull: { likes: req.user._id } },
     { new: true },
   )
-    .orFail(new Error('ErrorName'))
+    .orFail()
     .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.name === 'CastError' || err.name === 'DocumentNotFoundError') {

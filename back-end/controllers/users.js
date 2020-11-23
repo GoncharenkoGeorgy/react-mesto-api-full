@@ -101,7 +101,7 @@ const login = (req, res, next) => {
     });
 };
 
-function getLoginUser(req, res, next) {
+const getLoginUser = (req, res, next) => {
   const { authorization } = req.headers;
   const token = authorization.replace('Bearer ', '');
 
