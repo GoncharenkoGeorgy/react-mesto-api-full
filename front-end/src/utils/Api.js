@@ -116,12 +116,21 @@ class Api {
   }
 }
 
+
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
+  baseUrl: 'https://georgy.students.nomoreparties.xyz',
   headers: {
-    authorization: '759b7868-e5b7-4679-b3b4-6ab62cbc0a7b',
+    authorization: `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json'
   }
 });
+
+// const api = new Api({
+//   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
+//   headers: {
+//     authorization: '759b7868-e5b7-4679-b3b4-6ab62cbc0a7b',
+//     'Content-Type': 'application/json'
+//   }
+// });
 
 export { api };
