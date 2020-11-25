@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const isEmail = require('validator/lib/isEmail');
+const bcrypt = require('bcryptjs');
 
 const CrashAuthorizError = require('../errors/crash-autoriz-err.js');
 
