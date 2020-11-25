@@ -1,4 +1,5 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+//export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'https://georgy.students.nomoreparties.xyz';
 
 export const login = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {

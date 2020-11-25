@@ -116,7 +116,6 @@ class Api {
   }
 }
 
-
 const api = new Api({
   baseUrl: 'https://georgy.students.nomoreparties.xyz',
   headers: {
