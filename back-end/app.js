@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+var cors = require('cors');
 
 const { PORT = 3000 } = process.env;
 
@@ -24,6 +25,8 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
+
+app.options('*', cors());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
