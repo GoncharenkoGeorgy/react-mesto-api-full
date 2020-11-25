@@ -114,31 +114,15 @@ const login = (req, res, next) => {
 };
 
 const getLoginUser = (req, res, next) => {
-  const { authorization } = req.headers;
-  const token = authorization.replace('Bearer ', '');
-
-  let payload;
-
-  try {
-    payload = jwt.verify(token, JWT_SECRET);
-    User.findById(payload._id)
-      .then((user) => {
-        if (user === null) {
-          throw new NotFoundError('Пользователь не найден');
-        } else {
-          res.send({
-            _id: user._id,
-            email: user.email,
-            name: user.name,
-            about: user.about,
-            avatar: user.avatar,
-          });
-        }
-      })
-      .catch(next);
-  } catch (err) {
-    return res.status(401).send({ message: 'Необходима авторизация' });
-  }
+  User.findById(req.user._id)
+  .orFail()
+  .then((user) => {
+    if (!user) {
+      throw new NotFoundError('Нет пользователя с таким id');
+    }
+    return res.send(user);
+  })
+  .catch(next);
 }
 
 module.exports = {
