@@ -27,7 +27,7 @@ const deleteCard = (req, res, next) => {
   Card.findById(req.params.id)
     .orFail()
     .then((card) => {
-      if (card.owner.toString() !== req.user.id) {
+      if (card.owner.toString() !== req.user._id) {
         throw new BadRequestError({ message: 'Эту карточку создал другой пользователь' });
       }
       Card.findByIdAndRemove(req.params.id)

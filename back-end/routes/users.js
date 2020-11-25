@@ -8,7 +8,7 @@ router.get('/users', getUsers);
 
 router.get('/users/:id',celebrate({
   params: Joi.object().keys({
-    userId: Joi.string().alphanum().length(24), // ?доделать
+    id: Joi.string().alphanum().length(24).hex(), // ?доделать
   }),
 }), getUser);
 
@@ -27,6 +27,6 @@ router.patch('/users/me/avatar', celebrate({
   }),
 }), updateAvatar);
 
-router.get('/users/me', getLoginUser);
+router.get('/me', getLoginUser);
 
 module.exports = router;
