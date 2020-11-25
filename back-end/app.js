@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-app.use(express.static(path.join(__dirname, 'public')));
 const { PORT = 3000 } = process.env;
 
 const app = express();
@@ -26,6 +25,9 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
@@ -42,27 +44,25 @@ app.post('/signup', celebrate({
 
 app.use(auth);
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use('/', routes);
 
 app.use(errorLogger);
 
 app.use(errors()); // обработчик ошибок celebrate
 
-app.use((err, req, res, next) => {
-  // если у ошибки нет статуса, выставляем 500
-  const { statusCode = 500, message } = err;
+// app.use((err, req, res, next) => {
+//   // если у ошибки нет статуса, выставляем 500
+//   const { statusCode = 500, message } = err;
 
-  res
-    .status(statusCode)
-    .send({
-      // проверяем статус и выставляем сообщение в зависимости от него
-      message: statusCode === 500
-        ? 'На сервере произошла ошибка'
-        : message
-    });
-});
+//   res
+//     .status(statusCode)
+//     .send({
+//       // проверяем статус и выставляем сообщение в зависимости от него
+//       message: statusCode === 500
+//         ? 'На сервере произошла ошибка'
+//         : message
+//     });
+// });
 
 app.listen(PORT, () => {
   // Если всё работает, консоль покажет, какой порт приложение слушает

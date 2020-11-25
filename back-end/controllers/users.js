@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+const User = require('../models/user.js');
 
 const BadRequestError = require('../errors/bad-req-err.js');
 const ConflictError = require('../errors/conflict-err.js');
@@ -26,6 +26,7 @@ const getUser = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {
+  console.log(req);
   const {
     name, about, avatar, email, password,
   } = req.body;
