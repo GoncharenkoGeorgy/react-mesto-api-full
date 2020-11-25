@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+app.use(express.static(path.join(__dirname, 'public')));
 const { PORT = 3000 } = process.env;
 
 const app = express();
@@ -31,6 +32,7 @@ app.post('/signin', celebrate({
     password: Joi.string().required().min(8),
   }),
 }), login);
+
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
