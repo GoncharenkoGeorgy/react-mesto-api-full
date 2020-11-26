@@ -99,7 +99,7 @@ class Api {
 
   //up profile
   updateProfile(userData) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me/profile`, {
       method: "PATCH",
       headers: this.getHeaders(),
       body: JSON.stringify({
