@@ -62,7 +62,7 @@ const updateProfile = (req, res, next) => {
       upsert: true, // если пользователь не найден, он будет создан
     },
   )
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send({ data: {name: req.body.name, about: req.body.about} }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError('Переданы некорректные данные');
