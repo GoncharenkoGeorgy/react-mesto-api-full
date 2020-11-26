@@ -6,7 +6,7 @@ class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {  //было /users/me
+    return fetch(`${this._baseUrl}/me`, {  //было /users/me
       headers: this.getHeaders(),
     })
       .then(res => {
@@ -116,7 +116,7 @@ class Api {
   }
 
   getHeaders(){
-    const token = localStorage.getItem('jwt'); // тут мы получаем токен из localStorage
+    const token = localStorage.getItem('token'); // тут мы получаем токен из localStorage
     return {
       ...this.headers,
       'Authorization': `Bearer ${token}`,
