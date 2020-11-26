@@ -14,15 +14,7 @@ router.get('/:id',celebrate({
 
 // router.post('/users', createUser);
 
-router.patch('/users/me/profile', celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().required().min(100),
-  }).unknown(true),
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    about: Joi.string().required().min(2).max(30),
-  }),
-}), updateProfile);
+router.patch('/users/me/profile', updateProfile);
 
 router.patch('/users/me/avatar', celebrate({
   body: Joi.object().keys({
