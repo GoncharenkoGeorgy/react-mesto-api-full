@@ -1,6 +1,6 @@
 //export const BASE_URL = 'https://auth.nomoreparties.co';
-//export const BASE_URL = 'https://api.georgii.students.nomoreparties.xyz';
-export const BASE_URL = 'https://localhost:5000';
+export const BASE_URL = 'https://api.georgii.students.nomoreparties.xyz';
+//export const BASE_URL = 'https://localhost:5000';
 
 export const login = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
