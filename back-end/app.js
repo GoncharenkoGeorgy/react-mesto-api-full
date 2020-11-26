@@ -57,9 +57,6 @@ app.use(auth);
 
 app.use('/', routes);
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
 app.use(errorLogger);
 
 app.use(errors()); // обработчик ошибок celebrate
