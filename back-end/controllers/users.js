@@ -102,7 +102,7 @@ const login = (req, res, next) => {
         { expiresIn: '7d' },
       );
       // res.send({ token });
-      res.send({ message: `Токен: ${token}` });
+      res.send( token );
     })
     .catch(next);
 };
