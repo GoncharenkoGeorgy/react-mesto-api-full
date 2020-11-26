@@ -117,7 +117,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://localhost:27017/mestodb',
+  baseUrl: 'https://api.georgii.students.nomoreparties.xyz',
   headers: {
     authorization: `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json'
