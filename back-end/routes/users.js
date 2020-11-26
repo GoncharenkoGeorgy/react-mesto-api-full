@@ -6,7 +6,7 @@ const {
 
 router.get('/users', getUsers);
 
-router.get('/users/:id',celebrate({
+router.get('/users/:_id',celebrate({
   params: Joi.object().keys({
     id: Joi.string().alphanum().length(24).hex(), // ?доделать
   }),
