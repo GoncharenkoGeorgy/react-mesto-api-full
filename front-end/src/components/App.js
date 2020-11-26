@@ -40,7 +40,7 @@ function App() {
     Promise.all([api.getCards(), api.getUserInfo()])
       .then((res) => {
         setCurrentUser(res[1]);
-        setCards(res[0]);
+        setCards(res);
       })
       .catch((err) => console.log(err));
   }, [loggedIn]);
