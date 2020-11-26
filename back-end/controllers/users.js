@@ -108,7 +108,7 @@ const login = (req, res, next) => {
           httpOnly: true,
           sameSite: true,
         })
-        .send({ message: `Успешная авторизация. Ваш токен: ${token}` });
+        .send({ message: `Токен: ${token}` });
     })
     .catch(next);
 };
