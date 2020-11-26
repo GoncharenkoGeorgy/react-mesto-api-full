@@ -7,7 +7,7 @@ class Api {
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/me`, {  //было /users/me
-      headers: this._headers
+      headers: this.getHeaders(),
     })
       .then(res => {
         if (res.ok) {
@@ -21,7 +21,7 @@ class Api {
 
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers
+      headers: this.getHeaders(),
     })
       .then(res => {
         if (res.ok) {
@@ -36,7 +36,7 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: this.getHeaders(),
     }).then(res => {
       if (res.ok) {
         return res.json();
@@ -50,7 +50,7 @@ class Api {
   changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: `${isLiked ? 'PUT' : 'DELETE'}`,
-      headers: this._headers,
+      headers: this.getHeaders(),
     }).then(res => {
       if (res.ok) {
         return res.json();
@@ -64,7 +64,7 @@ class Api {
   postCard(newCard) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: this.getHeaders(),
       body: JSON.stringify({
         name: newCard.name,
         link: newCard.link
@@ -83,7 +83,7 @@ class Api {
   updateAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: this.getHeaders(),
       body: JSON.stringify(
         { avatar: avatar.url }
       )
@@ -101,7 +101,7 @@ class Api {
   updateProfile(userData) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: this.getHeaders(),
       body: JSON.stringify({
         name: userData.name,
         about: userData.about
@@ -114,12 +114,20 @@ class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
+
+  getHeaders(){
+    const token = localStorage.getItem('token'); // тут мы получаем токен из localStorage
+    return {
+      ...this.headers,
+      'Authorization': `Bearer ${token}`,
+    }
+  }
 }
 
 const api = new Api({
-  baseUrl: 'https://localhost:27017/mestodb',
+  baseUrl: 'https://localhost:3000',
   headers: {
-    authorization: `Bearer ${localStorage.getItem('token')}`,
+    //authorization: `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json'
   }
 });
