@@ -6,7 +6,7 @@ class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}/me`, {  //было /users/me
+    return fetch(`${this._baseUrl}/users/me`, {  //было /users/me
       headers: this.getHeaders(),
     })
       .then(res => {
@@ -99,7 +99,7 @@ class Api {
 
   //up profile
   updateProfile(userData) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me/profile`, {
       method: "PATCH",
       headers: this.getHeaders(),
       body: JSON.stringify({
