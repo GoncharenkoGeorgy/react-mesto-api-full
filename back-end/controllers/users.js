@@ -102,13 +102,7 @@ const login = (req, res, next) => {
         { expiresIn: '7d' },
       );
       // res.send({ token });
-      res
-        .cookie('jwt', token, {
-          maxAge: 3600000 * 24 * 7,
-          httpOnly: true,
-          sameSite: true,
-        })
-        .send({ message: `Токен: ${token}` });
+      res.send({ message: `Токен: ${token}` });
     })
     .catch(next);
 };
