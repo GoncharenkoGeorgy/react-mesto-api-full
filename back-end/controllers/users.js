@@ -59,7 +59,7 @@ const updateProfile = (req, res, next) => {
     {
       new: true, // обработчик then получит на вход обновлённую запись
       runValidators: true, // данные будут валидированы перед изменением
-      //upsert: true, // если пользователь не найден, он будет создан
+      upsert: true, // если пользователь не найден, он будет создан
     },
   )
     .then((user) => res.send({ data: user }))
