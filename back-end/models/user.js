@@ -9,14 +9,14 @@ const userSchema = new Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    // required: true,
+    required: true,
     default: 'Жак-Ив Кусто',
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
-    // required: true,
+    required: true,
     default: 'Исследователь',
   },
   avatar: {
