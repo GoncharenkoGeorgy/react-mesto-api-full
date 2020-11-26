@@ -54,7 +54,7 @@ const updateProfile = (req, res, next) => {
   const { name, about } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
-    { name, about },
+    { name:name, about:about },
     // Передадим объект опций:
     {
       new: true, // обработчик then получит на вход обновлённую запись
