@@ -34,7 +34,7 @@ function Header(props) {
         auth.checkToken(jwt)
           .then((res) => {
             if (res) {
-              setEmail(res.data.email);
+              setEmail(res.email);
             }
           })
           .catch(err => console.log(err));
