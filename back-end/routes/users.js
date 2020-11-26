@@ -6,11 +6,11 @@ const {
 
 router.get('/users', getUsers);
 
-router.get('/users/:id',celebrate({
-  params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24).hex(), // ?доделать
-  }),
-}), getUser);
+// router.get('/users/:id',celebrate({
+//   params: Joi.object().keys({
+//     id: Joi.string().alphanum().length(24).hex(), // ?доделать
+//   }),
+// }), getUser);
 
 // router.post('/users', createUser);
 
