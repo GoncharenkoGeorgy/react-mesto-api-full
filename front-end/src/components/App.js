@@ -43,7 +43,7 @@ function App() {
         setCards(res[0]);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [loggedIn]);
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
