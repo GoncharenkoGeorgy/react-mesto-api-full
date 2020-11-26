@@ -55,7 +55,7 @@ app.post('/signup', celebrate({
 
 app.use(auth);
 
-app.use('/', routes);
+app.use('/api/', routes);
 
 app.use(errorLogger);
 
