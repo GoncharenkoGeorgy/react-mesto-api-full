@@ -6,7 +6,7 @@ class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}/me`, {  //было /users/me
+    return fetch(`${this._baseUrl}/users/me`, {  //было /users/me
       headers: this.getHeaders(),
     })
       .then(res => {
