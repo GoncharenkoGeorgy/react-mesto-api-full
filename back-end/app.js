@@ -55,7 +55,10 @@ app.post('/signup', celebrate({
 
 app.use(auth);
 
-app.use('/api/', routes);
+app.use('/', routes);
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(errorLogger);
 
