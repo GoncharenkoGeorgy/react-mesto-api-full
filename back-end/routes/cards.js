@@ -13,21 +13,21 @@ router.post('/cards', celebrate({
   }),
 }), createCard);
 
-router.delete('/cards/:_id', celebrate({
+router.delete('/cards/:id', celebrate({
   params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24).hex(), // ?доделать
+    id: Joi.string().alphanum().length(24), // ?доделать
   }),
 }), deleteCard);
 
-router.put('/cards/:_id/likes', celebrate({
+router.put('/cards/:id/likes', celebrate({
   params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24).hex(), // ?доделать
+    id: Joi.string().alphanum().length(24), // ?доделать
   }),
 }), likeCard);
 
-router.delete('/cards/:_id/likes', celebrate({
+router.delete('/cards/:id/likes', celebrate({
   params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24).hex(), // ?доделать
+    id: Joi.string().alphanum().length(24), // ?доделать
   }),
 }), dislikeCard);
 
