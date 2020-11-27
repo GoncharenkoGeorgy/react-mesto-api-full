@@ -109,11 +109,9 @@ function App() {
 
   function handleUpdateUser(userData) {
     setLoading(true);
-    console.log(userData);
     api.updateProfile(userData)
       .then((newUser) => {
-        console.log(newUser);
-        setCurrentUser(newUser);
+        setCurrentUser(newUser.data);
         closeAllPopups();
       })
       .catch((err) => console.log(err))
@@ -124,7 +122,7 @@ function App() {
     setLoading(true);
     api.updateAvatar(avatar)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeAllPopups();
       })
       .catch((err) => console.log(err))

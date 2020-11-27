@@ -135,12 +135,4 @@ const api = new Api({
   }
 });
 
-// const api = new Api({
-//   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
-//   headers: {
-//     authorization: '759b7868-e5b7-4679-b3b4-6ab62cbc0a7b',
-//     'Content-Type': 'application/json'
-//   }
-// });
-
 export { api };
