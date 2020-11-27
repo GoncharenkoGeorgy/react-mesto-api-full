@@ -32,7 +32,8 @@ const deleteCard = (req, res, next) => {
         throw new BadRequestError({ message: 'Эту карточку создал другой пользователь' });
       }
       Card.findByIdAndRemove(req.params.id)
-        .then((card) => res.send({ data: card }))
+        .then((card) =>
+        res.send({ data: card }))
         .catch((err) => {
           if (err.name === 'CastError' || err.name === 'DocumentNotFoundError') {
             throw new NotFoundError('Карточка с таким id не найдена');

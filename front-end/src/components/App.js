@@ -39,9 +39,7 @@ function App() {
   React.useEffect(() => {
     Promise.all([api.getCards(), api.getUserInfo()])
       .then((res) => {
-        console.log(cards);
         setCurrentUser(res[1]);
-        console.log(currentUser);
         setCards(res[0]);
       })
       .catch((err) => console.log(err));
@@ -111,8 +109,10 @@ function App() {
 
   function handleUpdateUser(userData) {
     setLoading(true);
+    console.log(userData);
     api.updateProfile(userData)
       .then((newUser) => {
+        console.log(newUser);
         setCurrentUser(newUser);
         closeAllPopups();
       })
@@ -132,7 +132,6 @@ function App() {
   }
 
   function handleAddPlaceSubmit(card) {
-    console.log(card);
     setLoading(true);
     api
       .postCard(card)

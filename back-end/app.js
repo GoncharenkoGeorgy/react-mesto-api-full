@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 8080 } = process.env;
 
 const app = express();
 const routes = require('./routes/index.js');
@@ -61,19 +61,19 @@ app.use(errorLogger);
 
 app.use(errors()); // обработчик ошибок celebrate
 
-// app.use((err, req, res, next) => {
-//   // если у ошибки нет статуса, выставляем 500
-//   const { statusCode = 500, message } = err;
+app.use((err, req, res, next) => {
+  // если у ошибки нет статуса, выставляем 500
+  const { statusCode = 500, message } = err;
 
-//   res
-//     .status(statusCode)
-//     .send({
-//       // проверяем статус и выставляем сообщение в зависимости от него
-//       message: statusCode === 500
-//         ? 'На сервере произошла ошибка'
-//         : message
-//     });
-// });
+  res
+    .status(statusCode)
+    .send({
+      // проверяем статус и выставляем сообщение в зависимости от него
+      message: statusCode === 500
+        ? 'На сервере произошла ошибка'
+        : message
+    });
+});
 
 app.listen(PORT, () => {
   // Если всё работает, консоль покажет, какой порт приложение слушает

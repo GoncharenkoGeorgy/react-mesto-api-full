@@ -23,7 +23,8 @@ const cardSchema = new Schema({
     },
   },
   owner: {
-    type: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
     required: true,
   },
   createdAt: {
