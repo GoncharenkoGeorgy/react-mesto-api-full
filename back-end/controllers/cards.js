@@ -12,8 +12,9 @@ const getCards = (req, res, next) => {
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
   const { _id } = req.user;
+  console.log(req.user);
   Card.create({ name, link, owner: _id })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     // данные не записались, вернём ошибку
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -48,7 +49,7 @@ const likeCard = (req, res, next) => {
     { new: true },
   )
     .orFail()
-    .then((card) => res.send({ data: card }))
+    .then((likes) => res.send(likes))
     .catch((err) => {
       if (err.name === 'CastError' || err.name === 'DocumentNotFoundError') {
         throw new NotFoundError('Карточка с таким id не найдена');
@@ -64,7 +65,7 @@ const dislikeCard = (req, res, next) => {
     { new: true },
   )
     .orFail()
-    .then((card) => res.send({ data: card }))
+    .then((likes) => res.send(likes))
     .catch((err) => {
       if (err.name === 'CastError' || err.name === 'DocumentNotFoundError') {
         throw new NotFoundError('Карточка с таким id не найдена');

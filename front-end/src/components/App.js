@@ -39,7 +39,9 @@ function App() {
   React.useEffect(() => {
     Promise.all([api.getCards(), api.getUserInfo()])
       .then((res) => {
+        console.log(cards);
         setCurrentUser(res[1]);
+        console.log(currentUser);
         setCards(res[0]);
       })
       .catch((err) => console.log(err));
@@ -82,7 +84,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id); // i._id
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
@@ -130,11 +132,13 @@ function App() {
   }
 
   function handleAddPlaceSubmit(card) {
+    console.log(card);
     setLoading(true);
     api
       .postCard(card)
       .then((newCard) => {
         setCards([newCard, ...cards]);
+        console.log(newCard);
         closeAllPopups();
       })
       .catch((err) => console.log(err))

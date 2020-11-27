@@ -10,6 +10,8 @@ function Main(props) {
 
   const { onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardLike, onCardDelete, } = props;
 
+  //console.log(cards);
+
   return (
 
     <main className="content">

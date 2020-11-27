@@ -99,6 +99,7 @@ class Api {
 
   //up profile
   updateProfile(userData) {
+    console.log(userData);
     return fetch(`${this._baseUrl}/users/me/profile`, {
       method: "PATCH",
       headers: this.getHeaders(),
@@ -120,6 +121,7 @@ class Api {
     return {
       ...this.headers,
       'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'  //Тута
     }
   }
 }
@@ -129,7 +131,7 @@ const api = new Api({
   //baseUrl: 'http://localhost:8080',
   headers: {
     //authorization: `Bearer ${localStorage.getItem('token')}`,
-    'Content-Type': 'application/json'
+    //'Content-Type': 'application/json'
   }
 });
 
