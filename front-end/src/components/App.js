@@ -37,12 +37,14 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
-    Promise.all([api.getCards(), api.getUserInfo()])
+    if (loggedIn === true) {
+    Promise.all([api.getCards(), api.getUserInfo()]) 
       .then((res) => {
         setCurrentUser(res[1]);
         setCards(res[0]);
       })
       .catch((err) => console.log(err));
+    }
   }, [loggedIn]);
 
   function handleEditAvatarClick() {
@@ -82,7 +84,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i === currentUser._id); // i._id
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
@@ -207,6 +209,7 @@ function App() {
   function handleLogout() {
     localStorage.removeItem('token');
     history.push('/sign-in');
+    setLoggedIn(false);
   }
 
   return (

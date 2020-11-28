@@ -29,7 +29,6 @@ const createUser = (req, res, next) => {
   const {
     name, about, avatar, email, password,
   } = req.body;
-  console.log(req.body);
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
       name,
@@ -59,7 +58,6 @@ const updateProfile = (req, res, next) => {
     {
       new: true, // обработчик then получит на вход обновлённую запись
       runValidators: true, // данные будут валидированы перед изменением
-      upsert: true, // если пользователь не найден, он будет создан
     },
   )
     .then((user) => res.send({ data: user }))
@@ -79,7 +77,6 @@ const updateAvatar = (req, res, next) => {
     {
       new: true,
       runValidators: true,
-      upsert: true,
     },
   )
     .then((user) => res.send({ data: user }))
@@ -101,23 +98,19 @@ const login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      // res.send({ token });
-      res.send({token});
+      res.send({ token });
     })
     .catch(next);
 };
 
 const getLoginUser = (req, res, next) => {
-  User.findById(req.user._id)
-  .orFail()
-  .then((user) => {
+  User.findById(req.user._id).orFail().then((user) => {
     if (!user) {
       throw new NotFoundError('Нет пользователя с таким id');
     }
     return res.send(user);
-  })
-  .catch(next);
-}
+  }).catch(next);
+};
 
 module.exports = {
   getUsers, getUser, createUser, updateProfile, updateAvatar, login, getLoginUser,

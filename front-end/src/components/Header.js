@@ -17,12 +17,10 @@ function Header(props) {
 
   React.useEffect(() => {
     if (location.pathname === '/sign-in') {
-      setLoggedIn(false);
       setSign('Регистрация');
       setLink('/sign-up');
       setEmail('');
     } else if (location.pathname === '/sign-up') {
-      setLoggedIn(false);
       setSign('Войти');
       setLink('/sign-in');
       setEmail('');

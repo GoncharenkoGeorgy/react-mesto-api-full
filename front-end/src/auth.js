@@ -1,4 +1,3 @@
-//export const BASE_URL = 'https://auth.nomoreparties.co';
 export const BASE_URL = 'https://api.georgii.students.nomoreparties.xyz';
 //export const BASE_URL = 'http://localhost:8080';
 

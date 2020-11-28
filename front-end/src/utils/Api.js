@@ -6,7 +6,7 @@ class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {  //было /users/me
+    return fetch(`${this._baseUrl}/users/me`, {
       headers: this.getHeaders(),
     })
       .then(res => {
@@ -118,20 +118,15 @@ class Api {
   getHeaders(){
     const token = localStorage.getItem('token'); // тут мы получаем токен из localStorage
     return {
-      ...this.headers,
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'  //Тута
+      'Content-Type': 'application/json'
     }
   }
 }
 
 const api = new Api({
   baseUrl: 'https://api.georgii.students.nomoreparties.xyz',
-  //baseUrl: 'http://localhost:8080',
-  headers: {
-    //authorization: `Bearer ${localStorage.getItem('token')}`,
-    //'Content-Type': 'application/json'
-  }
+  //baseUrl: 'http://localhost:8080'
 });
 
 export { api };

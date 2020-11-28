@@ -1,12 +1,16 @@
 const jwt = require('jsonwebtoken');
+const CrashAuthorizError = require('../errors/crash-autoriz-err.js');
+
 const { JWT_SECRET, NODE_ENV } = process.env;
 
-const handleAuthError = (res) => { res.status(401).send({ message: 'Необходима авторизация' }); };
+// eslint-disable-next-line no-unused-vars
+const handleAuthError = (res) => { throw new CrashAuthorizError('Необходима авторизация'); };
 
-const extractBearerToken = (header) => {
+function extractBearerToken(header) {
   return header.replace('Bearer ', '');
-};
+}
 
+// eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 

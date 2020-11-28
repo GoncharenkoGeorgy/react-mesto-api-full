@@ -1,5 +1,6 @@
 const router = require('express').Router();
-
-router.all('*', (req, res) => res.status(404).send({ message: 'Запрашиваемый ресурс не найден' }));
+const NotFoundError = require('../errors/bad-req-err.js');
+// eslint-disable-next-line no-unused-vars
+router.all('*', (req, res) => { throw new NotFoundError('Запрашиваемый ресурс не найден'); });
 
 module.exports = router;

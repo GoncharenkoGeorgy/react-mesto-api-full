@@ -5,13 +5,11 @@ const cors = require('cors');
 const { PORT = 3000 } = process.env;
 
 const app = express();
+const { celebrate, Joi, errors } = require('celebrate');
 const routes = require('./routes/index.js');
 const { login, createUser } = require('./controllers/users.js');
-const auth = require('./middlewares/auth.js')
-const { celebrate, Joi, errors } = require('celebrate');
+const auth = require('./middlewares/auth.js');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
-//require('dotenv').config();
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
@@ -71,8 +69,9 @@ app.use((err, req, res, next) => {
       // проверяем статус и выставляем сообщение в зависимости от него
       message: statusCode === 500
         ? 'На сервере произошла ошибка'
-        : message
+        : message,
     });
+  next();
 });
 
 app.listen(PORT, () => {
