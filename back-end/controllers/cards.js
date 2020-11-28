@@ -12,7 +12,6 @@ const getCards = (req, res, next) => {
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
   const { _id } = req.user;
-  console.log(req.user);
   Card.create({ name, link, owner: _id })
     .then((card) => res.send(card))
     // данные не записались, вернём ошибку

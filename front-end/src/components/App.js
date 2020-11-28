@@ -41,7 +41,7 @@ function App() {
     Promise.all([api.getCards(), api.getUserInfo()]) 
       .then((res) => {
         setCurrentUser(res[1]);
-        setCards(res[0]);
+        setCards(res[0].reverse());
       })
       .catch((err) => console.log(err));
     }
@@ -137,7 +137,6 @@ function App() {
       .postCard(card)
       .then((newCard) => {
         setCards([newCard, ...cards]);
-        console.log(newCard);
         closeAllPopups();
       })
       .catch((err) => console.log(err))
